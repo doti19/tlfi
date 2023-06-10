@@ -1,15 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:tlfi/pages/home/widgets/my_card.dart';
+import 'package:provider/provider.dart';
+import 'package:tlfi/pages/shfons_page/widgets/my_card.dart';
 
 import '../../constants/color.dart';
 import '../../drawer/my_drawer.dart';
+import '../../providers/dark_theme_provider.dart';
 
-class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+class LelochmPage extends StatelessWidget {
+  const LelochmPage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final theme = Provider.of<DarkThemeProvider>(context);
+
     return Scaffold(
         extendBodyBehindAppBar: true,
         appBar: AppBar(
@@ -24,10 +28,10 @@ class HomePage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             mainAxisSize: MainAxisSize.min,
             children: [
-              const Text(
+              Text(
                 'ኣደይ',
                 style: TextStyle(
-                  color: MyColors.darkColor,
+                  color: theme.color1,
                   fontFamily: 'mulat_medium_italic',
                   fontWeight: FontWeight.bold,
                   fontSize: 45,
@@ -64,10 +68,11 @@ class HomePage extends StatelessWidget {
                   margin: const EdgeInsets.symmetric(
                     horizontal: 16,
                   ),
-                  child: const Text(
-                    'ሽፎን እና የባህል ልብሶች',
+                  child: Text(
+                    'ተጨማሪ ሌሎች',
                     overflow: TextOverflow.ellipsis,
                     style: TextStyle(
+                      color: theme.color1,
                       fontFamily: 'godawa',
                       fontWeight: FontWeight.bold,
                       fontSize: 25,

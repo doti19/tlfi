@@ -1,10 +1,12 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:provider/provider.dart';
 import 'package:readmore/readmore.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 import '../../../constants/color.dart';
+import '../../../providers/dark_theme_provider.dart';
 
 class MyCard extends StatefulWidget {
   final List<int> indexes;
@@ -36,6 +38,8 @@ class _MyCardState extends State<MyCard> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Provider.of<DarkThemeProvider>(context);
+
     return Container(
         // height: 500,
         margin: const EdgeInsets.symmetric(vertical: 4, horizontal: 15),
@@ -43,7 +47,7 @@ class _MyCardState extends State<MyCard> {
         decoration: BoxDecoration(
           border: Border.all(
             width: 2.0,
-            color: MyColors.darkColor,
+            color: theme.color1,
           ),
           image: const DecorationImage(
             image: AssetImage("assets/background/background_light_1.jpg"),
@@ -57,12 +61,12 @@ class _MyCardState extends State<MyCard> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            const Row(
+            Row(
               // mainAxisAlignment: MainAxisAlignment.spaceBetween,
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
                 CircleAvatar(
-                  backgroundColor: MyColors.darkColor,
+                  backgroundColor: theme.color1,
                   radius: 27,
                   child: CircleAvatar(
                     backgroundImage: AssetImage('assets/images/profile.jpg'),
@@ -73,7 +77,7 @@ class _MyCardState extends State<MyCard> {
                   padding: EdgeInsets.symmetric(horizontal: 8.0),
                   child: Text(
                     'ኣል- ኸያጢን ሸያጢን',
-                    style: TextStyle(color: MyColors.darkColor, fontSize: 20),
+                    style: TextStyle(color: theme.color1, fontSize: 20),
                   ),
                 ),
               ],
@@ -102,7 +106,7 @@ class _MyCardState extends State<MyCard> {
                     enlargeCenterPage: true,
                     // pageSnapping: false,
                     enableInfiniteScroll: false,
-                    aspectRatio: 0.6,
+                    aspectRatio: 0.5,
                     onPageChanged: (index, reason) =>
                         setState(() => activeIndex = index),
                   ),
@@ -110,7 +114,7 @@ class _MyCardState extends State<MyCard> {
                   itemBuilder: (context, index, realIndex) {
                     final image = images[widget.indexes[index]];
 
-                    return photo(image, widget.indexes[index]);
+                    return photo(image, widget.indexes[index], theme);
                   },
                 ),
                 Positioned(
@@ -122,31 +126,31 @@ class _MyCardState extends State<MyCard> {
                       decoration: BoxDecoration(
                           color: Colors.red,
                           shape: BoxShape.circle,
-                          border: Border.all(color: MyColors.darkColor)),
+                          border: Border.all(color: theme.color1)),
                       child: const Icon(
                         Icons.star,
                         color: Colors.white,
                       ),
                     )),
-                Positioned(
-                  top: 0,
-                  right: 0,
-                  child: ClipRRect(
-                    borderRadius:
-                        const BorderRadius.only(topRight: Radius.circular(21)),
-                    child: Container(
-                      color: Colors.black26,
-                      padding: const EdgeInsets.only(right: 8, left: 5),
-                      margin: const EdgeInsets.only(right: 2, top: 2),
-                      child: Text(
-                        '${activeIndex + 1}/${widget.indexes.length}',
-                        style: const TextStyle(
-                          color: Colors.white,
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
+                // Positioned(
+                //   top: 0,
+                //   right: 0,
+                //   child: ClipRRect(
+                //     borderRadius:
+                //         const BorderRadius.only(topRight: Radius.circular(21)),
+                //     child: Container(
+                //       color: Colors.black26,
+                //       padding: const EdgeInsets.only(right: 8, left: 5),
+                //       margin: const EdgeInsets.only(right: 2, top: 2),
+                //       child: Text(
+                //         '${activeIndex + 1}/${widget.indexes.length}',
+                //         style: const TextStyle(
+                //           color: Colors.white,
+                //         ),
+                //       ),
+                //     ),
+                //   ),
+                // ),
                 Positioned(
                   bottom: 0,
                   left: 0,
@@ -157,24 +161,23 @@ class _MyCardState extends State<MyCard> {
                     ),
                     child: Container(
                       decoration: BoxDecoration(
-                        border:
-                            Border.all(width: 1.0, color: MyColors.darkColor),
+                        border: Border.all(width: 1.0, color: theme.color1),
                         borderRadius: BorderRadius.circular(15),
-                        color: MyColors.lightColor,
+                        color: MyColors.lightColor2,
                       ),
                       padding: const EdgeInsets.only(left: 8, right: 5),
                       margin: const EdgeInsets.only(left: 2, bottom: 2),
-                      child: const Row(
+                      child: Row(
                         children: [
                           Icon(
                             Icons.visibility,
-                            color: MyColors.darkColor,
+                            color: theme.color1,
                           ),
                           SizedBox(width: 2),
                           Text(
                             '7.2K',
                             style: TextStyle(
-                              color: MyColors.darkColor,
+                              color: theme.color1,
                               fontWeight: FontWeight.bold,
                               fontSize: 18,
                             ),
@@ -197,9 +200,10 @@ class _MyCardState extends State<MyCard> {
                     //   type: WormType.thinUnderground,
                     // ),
                     effect: const SlideEffect(
-                      activeDotColor: MyColors.lightColor,
-                      dotHeight: 12,
-                      dotWidth: 12,
+                      activeDotColor: MyColors.lightColor2,
+                      dotHeight: 8,
+                      dotWidth: 8,
+                      radius: 10,
                       // jumpScale: 0.7,
                       // verticalOffset: 15,
                     ),
@@ -227,10 +231,9 @@ class _MyCardState extends State<MyCard> {
                       padding: const EdgeInsets.only(right: 8, left: 5),
                       margin: const EdgeInsets.only(right: 2, bottom: 2),
                       decoration: BoxDecoration(
-                        border:
-                            Border.all(width: 1.0, color: MyColors.darkColor),
+                        border: Border.all(width: 1.0, color: theme.color1),
                         borderRadius: BorderRadius.circular(15),
-                        color: MyColors.lightColor,
+                        color: MyColors.lightColor2,
                       ),
                       child: Row(
                         children: [
@@ -242,10 +245,10 @@ class _MyCardState extends State<MyCard> {
                             // fit: BoxFit.fill,
                             // clipBehavior: Clip.none,
                           ),
-                          const Text(
+                          Text(
                             " 5,600",
                             style: TextStyle(
-                              color: MyColors.darkColor,
+                              color: theme.color1,
                               fontSize: 18,
                               fontWeight: FontWeight.bold,
                             ),
@@ -260,12 +263,12 @@ class _MyCardState extends State<MyCard> {
             const SizedBox(
               height: 8,
             ),
-            const Text.rich(
+            Text.rich(
               textAlign: TextAlign.center,
               TextSpan(
                 text: 'ኣድራሻ:',
                 style: TextStyle(
-                    color: MyColors.darkColor,
+                    color: theme.color1,
                     fontFamily: 'godana',
                     fontSize: 18.0,
                     fontWeight: FontWeight.bold),
@@ -273,32 +276,30 @@ class _MyCardState extends State<MyCard> {
                   TextSpan(
                     text: 'መገናኛ፣ ዘፍምሽ',
                     style: TextStyle(
-                        color: MyColors.darkColor,
+                        color: theme.color1,
                         fontFamily: 'godana',
                         fontSize: 15),
                   ),
                 ],
               ),
             ),
-            const ReadMoreText(
+            ReadMoreText(
               'ጥለቱ ያምራል፣ ኣንቺ ግን ኣታምሪም፣ ዊ ኒድ ሳም ቴክስት ግን ያምራል፣ ዝምብለሽ ግዢው፣ ኣግሊ ቢች ጥለቱ ያምራል፣ ኣንቺ ግን ኣታምሪም፣ ዊ ኒድ ሳም ቴክስት ግን ያምራል፣ ዝምብለሽ ግዢው፣ ኣግሊ ቢች',
               trimLines: 2,
-              colorClickableText: MyColors.lightColor,
+              colorClickableText: MyColors.lightColor2,
               trimMode: TrimMode.Line,
               trimCollapsedText: 'ተጨማሪ',
               trimExpandedText: '  ኣሳንስ',
-              textAlign: TextAlign.center,
+              // textAlign: TextAlign.center,
               style: TextStyle(
-                  color: MyColors.darkColor,
-                  fontFamily: 'godana',
-                  fontSize: 15),
+                  color: theme.color1, fontFamily: 'godana', fontSize: 15),
               moreStyle: TextStyle(
-                  color: MyColors.lightColor,
+                  color: MyColors.lightColor2,
                   fontWeight: FontWeight.bold,
                   fontFamily: 'godana',
                   fontSize: 13),
               lessStyle: TextStyle(
-                  color: MyColors.lightColor,
+                  color: MyColors.lightColor2,
                   fontWeight: FontWeight.bold,
                   fontFamily: 'godana',
                   fontSize: 13),
@@ -307,11 +308,11 @@ class _MyCardState extends State<MyCard> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
-                const Text('12/12/12 10:09 a.m',
-                    style: TextStyle(color: MyColors.darkColor)),
+                Text('12/12/12 10:09 a.m',
+                    style: TextStyle(color: theme.color1)),
                 OutlinedButton.icon(
                   onPressed: () {},
-                  icon: SvgPicture.asset(
+                  label: SvgPicture.asset(
                     'assets/svgs/telegram.svg',
                     height: 25,
                     width: 25,
@@ -319,17 +320,18 @@ class _MyCardState extends State<MyCard> {
                     // fit: BoxFit.fill,
                     // clipBehavior: Clip.none,
                   ),
-                  label: const Text(
+                  icon: Text(
                     'ሻጭ',
                     style: TextStyle(
-                        color: MyColors.darkColor,
-                        fontFamily: 'godana',
-                        fontWeight: FontWeight.bold,
+                        color: theme.color1,
+                        fontFamily: 'adwa',
+                        // fontWeight: FontWeight.bold,
                         fontSize: 25),
                   ),
                   style: OutlinedButton.styleFrom(
                     padding: const EdgeInsets.symmetric(horizontal: 8),
-                    backgroundColor: MyColors.lightColor,
+                    backgroundColor: MyColors.lightColor2,
+                    side: BorderSide(width: 1.0, color: theme.color1),
                   ),
                 ),
               ],
@@ -339,13 +341,13 @@ class _MyCardState extends State<MyCard> {
   }
 
   void animateToSlide(int index) => controller.animateToPage(index);
-  Widget photo(String image, int index) => Container(
+  Widget photo(String image, int index, DarkThemeProvider theme) => Container(
         padding: const EdgeInsets.all(0),
         decoration: BoxDecoration(
           border: Border.all(
             width: 2.0,
 
-            color: MyColors.darkColor,
+            color: theme.color1,
             // strokeAlign: BorderSide.strokeAlignCenter,
           ),
           borderRadius: BorderRadius.circular(16),
