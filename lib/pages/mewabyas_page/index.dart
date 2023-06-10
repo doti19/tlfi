@@ -52,9 +52,9 @@ class MewabyasPage extends StatelessWidget {
         backgroundColor: Colors.transparent,
         drawer: const MyDrawer(),
         body: DecoratedBox(
-          decoration: const BoxDecoration(
+          decoration: BoxDecoration(
             image: DecorationImage(
-              image: AssetImage("assets/background/background_light_2.jpg"),
+              image: theme.mainBackground,
               opacity: 0.8,
               fit: BoxFit.cover,
             ),

@@ -14,7 +14,7 @@ class MyDrawer extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Provider.of<DarkThemeProvider>(context);
     return Drawer(
-      backgroundColor: MyColors.drawerlightColor,
+      backgroundColor: theme.drawerColor,
       child: Column(
         // padding: EdgeInsets.zero,
         crossAxisAlignment: CrossAxisAlignment.stretch,

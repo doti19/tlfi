@@ -49,8 +49,8 @@ class _MyCardState extends State<MyCard> {
             width: 2.0,
             color: theme.color1,
           ),
-          image: const DecorationImage(
-            image: AssetImage("assets/background/background_light_1.jpg"),
+          image: DecorationImage(
+            image: theme.cardBackground,
             fit: BoxFit.cover,
             opacity: 0.8,
           ),

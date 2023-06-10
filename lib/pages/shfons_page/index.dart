@@ -12,7 +12,7 @@ class ShfonsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final themeChange = Provider.of<DarkThemeProvider>(context);
+    final theme = Provider.of<DarkThemeProvider>(context);
     return Scaffold(
         extendBodyBehindAppBar: true,
         appBar: AppBar(
@@ -30,7 +30,7 @@ class ShfonsPage extends StatelessWidget {
               Text(
                 'ኣደይ',
                 style: TextStyle(
-                  color: themeChange.color1,
+                  color: theme.color1,
                   fontFamily: 'mulat_medium_italic',
                   fontWeight: FontWeight.bold,
                   fontSize: 45,
@@ -52,9 +52,9 @@ class ShfonsPage extends StatelessWidget {
         backgroundColor: Colors.transparent,
         drawer: const MyDrawer(),
         body: DecoratedBox(
-          decoration: const BoxDecoration(
+          decoration: BoxDecoration(
             image: DecorationImage(
-              image: AssetImage("assets/background/background_light_2.jpg"),
+              image: theme.mainBackground,
               opacity: 0.8,
               fit: BoxFit.cover,
             ),
@@ -71,7 +71,7 @@ class ShfonsPage extends StatelessWidget {
                     'ሽፎን እና የባህል ልብሶች',
                     overflow: TextOverflow.ellipsis,
                     style: TextStyle(
-                      color: themeChange.color1,
+                      color: theme.color1,
                       fontFamily: 'godawa',
                       fontWeight: FontWeight.bold,
                       fontSize: 25,

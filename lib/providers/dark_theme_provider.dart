@@ -16,4 +16,12 @@ class DarkThemeProvider with ChangeNotifier {
   }
 
   Color get color1 => _darkTheme ? MyColors.lightColor1 : MyColors.darkColor1;
+  Color get drawerColor =>
+      _darkTheme ? MyColors.drawerLightColor : MyColors.drawerDarkColor;
+  AssetImage get mainBackground => _darkTheme
+      ? const AssetImage("assets/background/background_light_2.jpg")
+      : const AssetImage("assets/background/background_dark_2.jpg");
+  AssetImage get cardBackground => _darkTheme
+      ? const AssetImage("assets/background/background_light_1.jpg")
+      : const AssetImage("assets/background/background_dark_1.jpg");
 }
