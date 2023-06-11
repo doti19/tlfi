@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 
-import '../constants/color.dart';
 import '../models/navigation_item.dart';
 import '../providers/dark_theme_provider.dart';
 import '../providers/navigation_provider.dart';
@@ -16,7 +15,6 @@ class MyDrawer extends StatelessWidget {
     return Drawer(
       backgroundColor: theme.drawerColor,
       child: Column(
-        // padding: EdgeInsets.zero,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
           DrawerHeader(
@@ -51,7 +49,6 @@ class MyDrawer extends StatelessWidget {
                   child: IconButton(
                     onPressed: () {
                       theme.darkTheme = !theme.darkTheme;
-                      print(theme.darkTheme);
                     },
                     icon: SvgPicture.asset(
                       '${theme.path}/sunmode.svg',
@@ -69,7 +66,7 @@ class MyDrawer extends StatelessWidget {
             text: 'ሽፎን እና የባህል ልብሶች',
             icon: SvgPicture.asset('${theme.path}/dress.svg',
                 height: 25, width: 25),
-            color: theme.color1,
+            theme: theme,
           ),
           buildMenuItem(
             context,
@@ -77,7 +74,7 @@ class MyDrawer extends StatelessWidget {
             text: 'ዓባያ እና ጅልባቦች',
             icon: SvgPicture.asset('${theme.path}/muslimabaya.svg',
                 height: 25, width: 25),
-            color: theme.color1,
+            theme: theme,
           ),
           buildMenuItem(
             context,
@@ -85,7 +82,7 @@ class MyDrawer extends StatelessWidget {
             text: 'መዋቢያዎች እና ጌጣጌጦች',
             icon: SvgPicture.asset('${theme.path}/cosmetics.svg',
                 height: 25, width: 25),
-            color: theme.color1,
+            theme: theme,
           ),
           buildMenuItem(
             context,
@@ -93,20 +90,12 @@ class MyDrawer extends StatelessWidget {
             text: 'ሌሎችም',
             icon: SvgPicture.asset('${theme.path}/perfume.svg',
                 height: 25, width: 25),
-            color: theme.color1,
+            theme: theme,
           ),
-          // const SizedBox(
-          //   height: 24,
-          // ),
-          // const Divider(color: MyColors.darkColor),
-          // const SizedBox(height: 24),
-          // Expanded(child: Container()),
-          // Expanded(child: Container()),
-          Spacer(flex: 1),
+          const Spacer(flex: 1),
           Container(
-            margin: EdgeInsets.symmetric(vertical: 16),
+            margin: const EdgeInsets.symmetric(vertical: 16),
             child: Column(
-              // mainAxisAlignment: MainAxisAlignment.end,
               children: <Widget>[
                 Text(
                   'የክፍያ ዘዴዎች',
@@ -145,15 +134,16 @@ class MyDrawer extends StatelessWidget {
     required NavigationItem item,
     required String text,
     required Widget icon,
-    required Color color,
+    required DarkThemeProvider theme,
   }) {
     final provider = Provider.of<NavigationProvider>(context);
     final currentItem = provider.navigationItem;
     final isSelected = item == currentItem;
-
+    final Color color = theme.color1;
+    final Color tileColor = theme.tileColor;
     return ListTile(
       selected: isSelected,
-      selectedTileColor: MyColors.lightColor2,
+      selectedTileColor: tileColor,
       leading: icon,
       title: Text(
         text,

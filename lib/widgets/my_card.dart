@@ -41,7 +41,6 @@ class _MyCardState extends State<MyCard> {
     final theme = Provider.of<DarkThemeProvider>(context);
 
     return Container(
-        // height: 500,
         margin: const EdgeInsets.symmetric(vertical: 4, horizontal: 15),
         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
         decoration: BoxDecoration(
@@ -62,19 +61,18 @@ class _MyCardState extends State<MyCard> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Row(
-              // mainAxisAlignment: MainAxisAlignment.spaceBetween,
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
                 CircleAvatar(
                   backgroundColor: theme.color1,
                   radius: 27,
-                  child: CircleAvatar(
+                  child: const CircleAvatar(
                     backgroundImage: AssetImage('assets/images/profile.jpg'),
                     radius: 25,
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 8.0),
+                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
                   child: Text(
                     'ኣል- ኸያጢን ሸያጢን',
                     style: TextStyle(color: theme.color1, fontSize: 20),
@@ -88,23 +86,11 @@ class _MyCardState extends State<MyCard> {
             Stack(
               alignment: Alignment.center,
               children: [
-                // SizedBox(
-                //   height: double.infinity,
-                //   child: PageView.builder(
-                //       controller: controller,
-                //       itemBuilder: (_, index) {
-                //         return photos(indexes)[index % photos(indexes).length];
-                //       }),
-                // ),
-                // ClipRRect(
-                //     borderRadius: BorderRadius.circular(15),
-                //     child: Image.asset('assets/images/2.jpg')),
                 CarouselSlider.builder(
                   carouselController: controller,
                   options: CarouselOptions(
                     viewportFraction: 1.0,
                     enlargeCenterPage: true,
-                    // pageSnapping: false,
                     enableInfiniteScroll: false,
                     aspectRatio: 0.5,
                     onPageChanged: (index, reason) =>
@@ -132,25 +118,6 @@ class _MyCardState extends State<MyCard> {
                         color: Colors.white,
                       ),
                     )),
-                // Positioned(
-                //   top: 0,
-                //   right: 0,
-                //   child: ClipRRect(
-                //     borderRadius:
-                //         const BorderRadius.only(topRight: Radius.circular(21)),
-                //     child: Container(
-                //       color: Colors.black26,
-                //       padding: const EdgeInsets.only(right: 8, left: 5),
-                //       margin: const EdgeInsets.only(right: 2, top: 2),
-                //       child: Text(
-                //         '${activeIndex + 1}/${widget.indexes.length}',
-                //         style: const TextStyle(
-                //           color: Colors.white,
-                //         ),
-                //       ),
-                //     ),
-                //   ),
-                // ),
                 Positioned(
                   bottom: 0,
                   left: 0,
@@ -188,33 +155,15 @@ class _MyCardState extends State<MyCard> {
                 Positioned(
                   bottom: 3,
                   child: AnimatedSmoothIndicator(
-                    // controller: controller,
                     count: widget.indexes.length,
                     activeIndex: activeIndex,
                     onDotClicked: animateToSlide,
-                    // effect: const WormEffect(
-                    //   dotHeight: 16,
-                    //   dotWidth: 16,
-                    //   type: WormType.thinUnderground,
-                    // ),
                     effect: const SlideEffect(
                       activeDotColor: MyColors.lightColor2,
                       dotHeight: 8,
                       dotWidth: 8,
                       radius: 10,
-                      // jumpScale: 0.7,
-                      // verticalOffset: 15,
                     ),
-                    // effect: const ScrollingDotsEffect(
-                    //   activeDotColor: Colors.redAccent,
-                    //   activeStrokeWidth: 2.6,
-                    //   activeDotScale: 1.3,
-                    //   maxVisibleDots: 5,
-                    //   radius: 10,
-                    //   spacing: 10,
-                    //   dotHeight: 10,
-                    //   dotWidth: 10,
-                    // ),
                   ),
                 ),
                 Positioned(
@@ -239,9 +188,6 @@ class _MyCardState extends State<MyCard> {
                             'assets/svgs/dollar.svg',
                             height: 18,
                             width: 18,
-
-                            // fit: BoxFit.fill,
-                            // clipBehavior: Clip.none,
                           ),
                           const Text(
                             " 5,600",
@@ -288,15 +234,14 @@ class _MyCardState extends State<MyCard> {
               trimMode: TrimMode.Line,
               trimCollapsedText: 'ተጨማሪ',
               trimExpandedText: '  ኣሳንስ',
-              // textAlign: TextAlign.center,
               style: TextStyle(
                   color: theme.color1, fontFamily: 'godana', fontSize: 15),
-              moreStyle: TextStyle(
+              moreStyle: const TextStyle(
                   color: MyColors.lightColor2,
                   fontWeight: FontWeight.bold,
                   fontFamily: 'godana',
                   fontSize: 13),
-              lessStyle: TextStyle(
+              lessStyle: const TextStyle(
                   color: MyColors.lightColor2,
                   fontWeight: FontWeight.bold,
                   fontFamily: 'godana',
@@ -314,16 +259,12 @@ class _MyCardState extends State<MyCard> {
                     'assets/svgs/telegram.svg',
                     height: 25,
                     width: 25,
-
-                    // fit: BoxFit.fill,
-                    // clipBehavior: Clip.none,
                   ),
-                  icon: Text(
+                  icon: const Text(
                     'ሻጭ',
                     style: TextStyle(
                         color: MyColors.lightColor1,
                         fontFamily: 'adwa',
-                        // fontWeight: FontWeight.bold,
                         fontSize: 25),
                   ),
                   style: OutlinedButton.styleFrom(
@@ -344,9 +285,7 @@ class _MyCardState extends State<MyCard> {
         decoration: BoxDecoration(
           border: Border.all(
             width: 2.0,
-
             color: theme.color1,
-            // strokeAlign: BorderSide.strokeAlignCenter,
           ),
           borderRadius: BorderRadius.circular(16),
         ),
