@@ -2,10 +2,14 @@ import 'package:flutter/material.dart';
 
 import '../constants/color.dart';
 import '../shared_preferences/shared_preferences.dart';
+import 'navigation_provider.dart';
 
 class DarkThemeProvider with ChangeNotifier {
   DarkThemePreference darkThemePreference = DarkThemePreference();
   bool _darkTheme = false;
+  // final NavigationProvider navigationProvider;
+
+  // DarkThemeProvider(this.navigationProvider);
 
   bool get darkTheme => _darkTheme;
 
@@ -18,6 +22,7 @@ class DarkThemeProvider with ChangeNotifier {
   Color get color1 => _darkTheme ? MyColors.lightColor1 : MyColors.darkColor1;
   Color get drawerColor =>
       _darkTheme ? MyColors.drawerLightColor : MyColors.drawerDarkColor;
+  String get path => _darkTheme ? "assets/svgs/light" : "assets/svgs/dark";
   AssetImage get mainBackground => _darkTheme
       ? const AssetImage("assets/background/background_light_2.jpg")
       : const AssetImage("assets/background/background_dark_2.jpg");

@@ -39,7 +39,7 @@ class MyDrawer extends StatelessWidget {
                       ),
                     ),
                     SvgPicture.asset(
-                      'assets/svgs/flower_daisy.svg',
+                      '${theme.path}/flower_daisy.svg',
                       height: 45,
                       width: 55,
                     ),
@@ -54,7 +54,7 @@ class MyDrawer extends StatelessWidget {
                       print(theme.darkTheme);
                     },
                     icon: SvgPicture.asset(
-                      'assets/svgs/sunmode.svg',
+                      '${theme.path}/sunmode.svg',
                       height: 35,
                       width: 35,
                     ),
@@ -67,29 +67,33 @@ class MyDrawer extends StatelessWidget {
             context,
             item: NavigationItem.shfon,
             text: 'ሽፎን እና የባህል ልብሶች',
-            icon: Icons.woman,
-            theme: theme,
+            icon: SvgPicture.asset('${theme.path}/dress.svg',
+                height: 25, width: 25),
+            color: theme.color1,
           ),
           buildMenuItem(
             context,
             item: NavigationItem.abaya,
             text: 'ዓባያ እና ጅልባቦች',
-            icon: Icons.pregnant_woman,
-            theme: theme,
+            icon: SvgPicture.asset('${theme.path}/muslimabaya.svg',
+                height: 25, width: 25),
+            color: theme.color1,
           ),
           buildMenuItem(
             context,
             item: NavigationItem.mewabya,
             text: 'መዋቢያዎች እና ጌጣጌጦች',
-            icon: Icons.elderly_woman,
-            theme: theme,
+            icon: SvgPicture.asset('${theme.path}/cosmetics.svg',
+                height: 25, width: 25),
+            color: theme.color1,
           ),
           buildMenuItem(
             context,
             item: NavigationItem.lelochm,
             text: 'ሌሎችም',
-            icon: Icons.checkroom,
-            theme: theme,
+            icon: SvgPicture.asset('${theme.path}/perfume.svg',
+                height: 25, width: 25),
+            color: theme.color1,
           ),
           // const SizedBox(
           //   height: 24,
@@ -140,19 +144,17 @@ class MyDrawer extends StatelessWidget {
     BuildContext context, {
     required NavigationItem item,
     required String text,
-    required IconData icon,
-    required DarkThemeProvider theme,
+    required Widget icon,
+    required Color color,
   }) {
     final provider = Provider.of<NavigationProvider>(context);
     final currentItem = provider.navigationItem;
     final isSelected = item == currentItem;
 
-    Color color = theme.color1;
-
     return ListTile(
       selected: isSelected,
       selectedTileColor: MyColors.lightColor2,
-      leading: Icon(icon, color: color, size: 25),
+      leading: icon,
       title: Text(
         text,
         overflow: TextOverflow.ellipsis,
@@ -165,5 +167,6 @@ class MyDrawer extends StatelessWidget {
   void selectItem(BuildContext context, NavigationItem item) {
     final provider = Provider.of<NavigationProvider>(context, listen: false);
     provider.setNavigationItem(item);
+    Navigator.pop(context);
   }
 }

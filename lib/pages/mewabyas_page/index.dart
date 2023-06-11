@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
-import 'package:tlfi/pages/shfons_page/widgets/my_card.dart';
 
 import '../../constants/color.dart';
 import '../../drawer/my_drawer.dart';
 import '../../providers/dark_theme_provider.dart';
+import '../../widgets/my_card.dart';
 
 class MewabyasPage extends StatelessWidget {
   const MewabyasPage({super.key});
@@ -37,7 +37,7 @@ class MewabyasPage extends StatelessWidget {
                 ),
               ),
               SvgPicture.asset(
-                'assets/svgs/flower_daisy.svg',
+                '${theme.path}/flower_daisy.svg',
                 height: 25,
                 width: 55,
 
@@ -72,7 +72,7 @@ class MewabyasPage extends StatelessWidget {
                     overflow: TextOverflow.ellipsis,
                     style: TextStyle(
                       color: theme.color1,
-                      fontFamily: 'godawa',
+                      fontFamily: 'godana',
                       fontWeight: FontWeight.bold,
                       fontSize: 25,
                     ),

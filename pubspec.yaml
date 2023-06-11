@@ -70,6 +70,8 @@ flutter:
     - assets/images/
     - assets/background/
     - assets/svgs/
+    - assets/svgs/dark/
+    - assets/svgs/light/
 
     # - images/a_dot_ham.jpeg
 
@@ -88,7 +90,7 @@ flutter:
     - family: adwa
       fonts:
         - asset: assets/fonts/adwa.ttf
-    - family: godawa
+    - family: godana
       fonts:
         - asset: assets/fonts/godana.ttf
     - family: mulat_medium_italic

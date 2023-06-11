@@ -5,19 +5,22 @@ import 'package:provider/provider.dart';
 import '../../constants/color.dart';
 import '../../drawer/my_drawer.dart';
 import '../../providers/dark_theme_provider.dart';
+import '../../providers/navigation_provider.dart';
 import '../../widgets/my_card.dart';
 
-class AbayasPage extends StatelessWidget {
-  const AbayasPage({super.key});
+class MainPage extends StatelessWidget {
+  // final String title;
+  const MainPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     final theme = Provider.of<DarkThemeProvider>(context);
-
+    final nav = Provider.of<NavigationProvider>(context);
     return Scaffold(
         extendBodyBehindAppBar: true,
         appBar: AppBar(
           centerTitle: true,
+
           // leading: IconButton(
           //     onPressed: () => Scaffold,
           //     icon: const Icon(
@@ -69,7 +72,8 @@ class AbayasPage extends StatelessWidget {
                     horizontal: 16,
                   ),
                   child: Text(
-                    'ዓባያ እና ጅልባቦች',
+                    nav.title,
+                    // title,
                     overflow: TextOverflow.ellipsis,
                     style: TextStyle(
                       color: theme.color1,
