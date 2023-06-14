@@ -46,7 +46,7 @@ class _MyCardState extends State<MyCard> {
     final theme = Provider.of<DarkThemeProvider>(context);
 
     return Container(
-        margin: const EdgeInsets.symmetric(vertical: 4, horizontal: 15),
+        margin: const EdgeInsets.symmetric(vertical: 4, horizontal: 5),
         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 2),
         decoration: BoxDecoration(
           border: Border.all(
@@ -70,10 +70,10 @@ class _MyCardState extends State<MyCard> {
               children: <Widget>[
                 CircleAvatar(
                   backgroundColor: theme.color1,
-                  radius: 22,
+                  radius: 20,
                   child: const CircleAvatar(
                     backgroundImage: AssetImage('assets/images/profile.jpg'),
-                    radius: 20,
+                    radius: 18,
                   ),
                 ),
                 Padding(
@@ -204,7 +204,6 @@ class _MyCardState extends State<MyCard> {
                   left: 0,
                   child: ClipRRect(
                     borderRadius: const BorderRadius.only(
-                      topRight: Radius.circular(15),
                       bottomLeft: Radius.circular(21),
                     ),
                     child: Container(
@@ -218,7 +217,7 @@ class _MyCardState extends State<MyCard> {
                       child: Row(
                         children: [
                           SvgPicture.asset('assets/svgs/eye.svg',
-                              height: 20, width: 20),
+                              height: 18, width: 18),
                           const SizedBox(width: 2),
                           const Text(
                             '7.2K',
@@ -252,7 +251,6 @@ class _MyCardState extends State<MyCard> {
                   right: 0,
                   child: ClipRRect(
                     borderRadius: const BorderRadius.only(
-                      topLeft: Radius.circular(15),
                       bottomRight: Radius.circular(21),
                     ),
                     child: Container(
@@ -267,8 +265,8 @@ class _MyCardState extends State<MyCard> {
                         children: [
                           SvgPicture.asset(
                             'assets/svgs/dollar.svg',
-                            height: 20,
-                            width: 20,
+                            height: 22,
+                            width: 22,
                           ),
                           const Text(
                             " 5,600",
