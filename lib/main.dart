@@ -4,8 +4,17 @@ import 'package:tlfi/pages/main_page/main_page.dart';
 import 'package:tlfi/providers/dark_theme_provider.dart';
 import 'package:tlfi/providers/navigation_provider.dart';
 import 'package:tlfi/themes/theme_data.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 
 void main() {
+  WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
+  Future.delayed(
+    const Duration(seconds: 1),
+    () {
+      FlutterNativeSplash.remove();
+    },
+  );
   runApp(const MyApp());
 }
 

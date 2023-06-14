@@ -1,9 +1,14 @@
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:easy_image_viewer/easy_image_viewer.dart';
+import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:photo_view/photo_view.dart';
+import 'package:photo_view/photo_view_gallery.dart';
 import 'package:provider/provider.dart';
 import 'package:readmore/readmore.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+import 'package:tlfi/widgets/photo_viewer.dart';
 
 import '../../../constants/color.dart';
 import '../../../providers/dark_theme_provider.dart';
@@ -42,7 +47,7 @@ class _MyCardState extends State<MyCard> {
 
     return Container(
         margin: const EdgeInsets.symmetric(vertical: 4, horizontal: 15),
-        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 2),
         decoration: BoxDecoration(
           border: Border.all(
             width: 2.0,
@@ -65,17 +70,20 @@ class _MyCardState extends State<MyCard> {
               children: <Widget>[
                 CircleAvatar(
                   backgroundColor: theme.color1,
-                  radius: 27,
+                  radius: 22,
                   child: const CircleAvatar(
                     backgroundImage: AssetImage('assets/images/profile.jpg'),
-                    radius: 25,
+                    radius: 20,
                   ),
                 ),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 8.0),
                   child: Text(
-                    'ኣል- ኸያጢን ሸያጢን',
-                    style: TextStyle(color: theme.color1, fontSize: 20),
+                    'ኣል-ኸያጢን ሸያጢን',
+                    style: TextStyle(
+                        color: theme.color1,
+                        fontFamily: 'godana',
+                        fontSize: 20),
                   ),
                 ),
               ],
@@ -89,10 +97,12 @@ class _MyCardState extends State<MyCard> {
                 CarouselSlider.builder(
                   carouselController: controller,
                   options: CarouselOptions(
+                    // autoPlay: true,
+                    // pauseAutoPlayInFiniteScroll: true,
                     viewportFraction: 1.0,
-                    enlargeCenterPage: true,
+                    // enlargeCenterPage: true,
                     enableInfiniteScroll: false,
-                    aspectRatio: 0.5,
+                    aspectRatio: 0.6,
                     onPageChanged: (index, reason) =>
                         setState(() => activeIndex = index),
                   ),
@@ -100,7 +110,78 @@ class _MyCardState extends State<MyCard> {
                   itemBuilder: (context, index, realIndex) {
                     final image = images[widget.indexes[index]];
 
-                    return photo(image, widget.indexes[index], theme);
+                    return InkWell(
+                      child: photo(image, widget.indexes[index], theme),
+                      onTap: () async {
+                        showGeneralDialog(
+                          context: context,
+                          barrierColor: Colors.black12.withOpacity(0.2),
+                          pageBuilder: (context, animation,
+                                  secondaryAnimation) =>
+                              // Center(
+                              //   child: Text('hello',
+                              //       style: TextStyle(color: Colors.white)),
+                              // )
+                              Dismissible(
+                            resizeDuration: const Duration(milliseconds: 10),
+                            movementDuration: const Duration(milliseconds: 0),
+                            key: UniqueKey(),
+                            direction: DismissDirection.vertical,
+                            onDismissed: (_) {
+                              Navigator.of(context).pop();
+                            },
+                            child: myPhotoViewer(imageUrl: [
+                              images[widget.indexes[0]],
+                              images[widget.indexes[1]],
+                              images[widget.indexes[2]]
+                            ], initial: index),
+                          ),
+                        );
+                        // showImageViewer(
+                        //     context,
+                        // AssetImage(
+                        //     'assets/images/${images[widget.indexes[0]]}'));
+                        // showModalBottomSheet(
+                        //   context: context,
+                        //   builder: ((context) {
+                        //     return PhotoViewer(imageUrl: [
+                        //       images[widget.indexes[0]],
+                        //       images[widget.indexes[1]],
+                        //       images[widget.indexes[2]]
+                        //     ], initialPage: index);
+                        //   }),
+                        // );
+                        // MultiImageProvider multiImageProvider =
+                        //     MultiImageProvider([
+                        //   AssetImage(
+                        //       'assets/images/${images[widget.indexes[0]]}'),
+                        //   AssetImage(
+                        //       'assets/images/${images[widget.indexes[1]]}'),
+                        //   AssetImage(
+                        //       'assets/images/${images[widget.indexes[2]]}'),
+                        // ], initialIndex: index);
+                        // showImageViewerPager(
+                        //   context,
+                        //   multiImageProvider,
+                        //   doubleTapZoomable: true,
+                        //   // useSafeArea: true,
+                        //   // swipeDismissible: true,
+                        //   // immersive: false,
+                        //   // useSafeArea: true,
+                        // );
+
+                        // Navigator.push(
+                        //   context,
+                        //   MaterialPageRoute(
+                        //     builder: (context) => PhotoViewer(imageUrl: [
+                        //       images[widget.indexes[0]],
+                        //       images[widget.indexes[1]],
+                        //       images[widget.indexes[2]]
+                        //     ], initialPage: index),
+                        //   ),
+                        // );
+                      },
+                    );
                   },
                 ),
                 Positioned(
@@ -137,14 +218,14 @@ class _MyCardState extends State<MyCard> {
                       child: Row(
                         children: [
                           SvgPicture.asset('assets/svgs/eye.svg',
-                              height: 18, width: 18),
+                              height: 20, width: 20),
                           const SizedBox(width: 2),
                           const Text(
                             '7.2K',
                             style: TextStyle(
                               color: MyColors.lightColor1,
                               fontWeight: FontWeight.bold,
-                              fontSize: 18,
+                              fontSize: 20,
                             ),
                           ),
                         ],
@@ -186,14 +267,14 @@ class _MyCardState extends State<MyCard> {
                         children: [
                           SvgPicture.asset(
                             'assets/svgs/dollar.svg',
-                            height: 18,
-                            width: 18,
+                            height: 20,
+                            width: 20,
                           ),
                           const Text(
                             " 5,600",
                             style: TextStyle(
                               color: MyColors.lightColor1,
-                              fontSize: 18,
+                              fontSize: 20,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
@@ -247,36 +328,125 @@ class _MyCardState extends State<MyCard> {
                   fontFamily: 'godana',
                   fontSize: 13),
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: [
-                Text('12/12/12 10:09 a.m',
-                    style: TextStyle(color: theme.color1)),
-                OutlinedButton.icon(
-                  onPressed: () {},
-                  label: SvgPicture.asset(
-                    'assets/svgs/telegram.svg',
-                    height: 25,
-                    width: 25,
+            Container(
+              margin: EdgeInsets.only(top: 8),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  Text('12/12/12 10:09 a.m',
+                      style:
+                          TextStyle(color: theme.color1, fontFamily: 'godana')),
+                  OutlinedButton.icon(
+                    onPressed: () {},
+                    label: SvgPicture.asset(
+                      'assets/svgs/telegram.svg',
+                      height: 25,
+                      width: 25,
+                    ),
+                    icon: const Text(
+                      'ሻጭ',
+                      style: TextStyle(
+                          color: MyColors.lightColor1,
+                          fontFamily: 'adwa',
+                          fontSize: 25),
+                    ),
+                    style: ButtonStyle(
+                        tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                        padding: MaterialStateProperty.all(
+                            EdgeInsets.symmetric(horizontal: 8)),
+                        backgroundColor:
+                            MaterialStateProperty.all(MyColors.lightColor2),
+                        side: MaterialStateProperty.all(BorderSide(
+                            color: theme.darkTheme
+                                ? MyColors.lightColor1
+                                : MyColors.darkColor1,
+                            width: 1.0)),
+                        shape: MaterialStateProperty.all(
+                          RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(15)),
+                        )),
+                    // style: OutlinedButton.styleFrom(
+                    //   padding: const EdgeInsets.symmetric(horizontal: 8),
+                    //   backgroundColor: MyColors.lightColor2,
+
+                    // ),
                   ),
-                  icon: const Text(
-                    'ሻጭ',
-                    style: TextStyle(
-                        color: MyColors.lightColor1,
-                        fontFamily: 'adwa',
-                        fontSize: 25),
-                  ),
-                  style: OutlinedButton.styleFrom(
-                    padding: const EdgeInsets.symmetric(horizontal: 8),
-                    backgroundColor: MyColors.lightColor2,
-                    side: BorderSide(width: 1.0, color: theme.color1),
-                  ),
-                ),
-              ],
+                ],
+              ),
             )
           ],
         ));
+  }
+
+  Widget myPhotoViewer({required List<String> imageUrl, required int initial}) {
+    PageController pageController = PageController(initialPage: initial);
+    return Scaffold(
+      extendBodyBehindAppBar: true,
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        // leading: Icon(Icons.close),
+        iconTheme: const IconThemeData(),
+        elevation: 0,
+        backgroundColor: Colors.black12,
+        actions: [
+          OutlinedButton(
+              child: Icon(
+                Icons.close,
+                color: MyColors.darkColor1,
+                size: 25,
+              ),
+              onPressed: () {
+                Navigator.of(context).pop();
+              })
+        ],
+      ),
+      body: PhotoViewGallery.builder(
+        // scrollPhysics: const BouncingScrollPhysics(),
+        // allowImplicitScrolling: true,
+        // gaplessPlayback: true,
+        builder: (BuildContext context, int index) {
+          return PhotoViewGalleryPageOptions(
+            imageProvider: AssetImage('assets/images/${imageUrl[index]}'),
+            // scaleStateController: _scaleStateController,
+            scaleStateCycle: otherScaleState,
+            initialScale: PhotoViewComputedScale.contained,
+            minScale: PhotoViewComputedScale.contained * 0.9,
+            maxScale: PhotoViewComputedScale.covered * 2,
+            // controller: _controller,
+            // tightMode: true,
+
+            // childSize: MediaQuery.of(context).size,
+            // heroAttributes: PhotoViewHeroAttributes(tag: "Hello there"),
+            // gestureDetectorBehavior: HitTestBehavior.opaque,
+            basePosition: Alignment.center,
+          );
+        },
+        itemCount: imageUrl.length,
+        // loadingBuilder: (context, event) => Center(
+        //   child: Container(
+        //     width: 20.0,
+        //     height: 20.0,
+        //     child: CircularProgressIndicator(
+        //       value: event == null ? 0 : event.cumulativeBytesLoaded / 15,
+        //     ),
+        //   ),
+        // ),
+        // backgroundDecoration: widget.backgroundDecoration,
+        pageController: pageController,
+        // onPageChanged: onPageChanged,
+      ),
+    );
+  }
+
+  PhotoViewScaleState otherScaleState(PhotoViewScaleState actual) {
+    print('here');
+    print(actual);
+
+    if (actual == PhotoViewScaleState.covering) {
+      return PhotoViewScaleState.initial;
+    }
+    return PhotoViewScaleState.covering;
   }
 
   void animateToSlide(int index) => controller.animateToPage(index);
@@ -295,7 +465,9 @@ class _MyCardState extends State<MyCard> {
         ),
       );
 
-  List<Widget> photos(List<int> indexes) {
+  List<Widget> photos(
+    List<int> indexes,
+  ) {
     final pages = List.generate(
         3,
         ((index) => ClipRRect(
